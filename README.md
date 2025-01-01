@@ -19,27 +19,27 @@ Before running the project, make sure you have the following installed on your m
 
 Use the following command to clone the repository to your local machine:
 
-`````bash
+```bash
 git clone https://github.com/AdebayoBunmiSolomon/user-task.git
 
----
+```
 
 ### 2. Navigate to the project directory
 
 cd cloned-repo-project
+`
 
 ### 3. Install Dependencies
 
-```bash
-npm install /
-yarn install /
-pnpm install
+npm install or
+yarn install or
+pnpm install or
+``
 
 ### 4. Run the project
 
-````bash
 npm run dev
-`````
+``
 
 ### 5. Test Web App
 
