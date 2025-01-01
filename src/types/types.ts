@@ -36,3 +36,11 @@ export interface inputProps {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
 }
+
+export type customPaginationType = {
+  rowsPerPage: any;
+  totalRows: any;
+  currentPage: any;
+  onPageChange: any;
+  onRowsPerPageChange: any;
+};

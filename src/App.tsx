@@ -3,8 +3,6 @@ import { Button } from "./components/shared";
 import { GoPlusCircle } from "react-icons/go";
 import { sideBars } from "./constants";
 import { useState } from "react";
-import { FaComments } from "react-icons/fa";
-import { FaRegUser } from "react-icons/fa6";
 import "./App.css";
 import { useApp } from "./hooks";
 import { AddComments, AddUsers } from "./pages";
@@ -12,6 +10,8 @@ import { selectedActionBarType } from "./types/types";
 import { useAddComments } from "./api/services/comments";
 import { useAddUsers } from "./api/services/users";
 import { CommentList, UsersList } from "./components/page";
+import { CommentsIcon } from "./assets/commentsIcon";
+import { UsersIcon } from "./assets/usersIcon";
 
 function App() {
   const [selectedActionBar, setSelectedActionBar] =
@@ -58,12 +58,22 @@ function App() {
                       : "text-[#000000]"
                   } duration-700 text-xs font-normal rounded-[4px] flex gap-2`}
                   onClick={() => setSelectedActionBar(action)}>
-                  {index === 0 ? <FaComments /> : <FaRegUser />}
+                  {index === 0 ? (
+                    <CommentsIcon
+                      color={
+                        selectedActionBar === "Comments" ? "white" : "black"
+                      }
+                    />
+                  ) : (
+                    <UsersIcon
+                      color={selectedActionBar === "Users" ? "white" : "black"}
+                    />
+                  )}
                   {action}
                 </button>
               ))}
           </div>
-          <div className='w-[88%] h-[400px] bg-[#F5F5F5] overflow-y-scroll overflow-hidden rounded-lg p-3 scrollbar-hidden'>
+          <div className='w-[88%] h-[400px] bg-[#F5F5F5] overflow-y-scroll overflow-hidden rounded-md p-2 scrollbar-hidden'>
             {selectedActionBar === sideBars[0] ? (
               <CommentList />
             ) : (
