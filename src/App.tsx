@@ -9,7 +9,9 @@ import "./App.css";
 import { useApp } from "./hooks";
 import { AddComments, AddUsers } from "./pages";
 import { selectedActionBarType } from "./types/types";
-import { useAddComments, useAddUsers } from "./api/services";
+import { useAddComments } from "./api/services/comments";
+import { useAddUsers } from "./api/services/users";
+import { CommentList, UsersList } from "./components/page";
 
 function App() {
   const [selectedActionBar, setSelectedActionBar] =
@@ -61,8 +63,12 @@ function App() {
                 </button>
               ))}
           </div>
-          <div className='w-[88%] h-[400px] bg-[#F5F5F5] overflow-hidden rounded-md'>
-            <p>{selectedActionBar === sideBars[0] ? "Comments" : "Users"}</p>
+          <div className='w-[88%] h-[400px] bg-[#F5F5F5] overflow-y-scroll overflow-hidden rounded-lg p-3 scrollbar-hidden'>
+            {selectedActionBar === sideBars[0] ? (
+              <CommentList />
+            ) : (
+              <UsersList />
+            )}
           </div>
         </div>
       </div>

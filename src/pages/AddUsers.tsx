@@ -5,9 +5,14 @@ import { useForm, Controller } from "react-hook-form";
 import { addUsersFormTypes } from "../form/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addUsersValidationSchema } from "../form/validation";
+import { useAddUsers } from "../api/services/users";
+import { useUsersStore } from "../store/users";
 
 export const AddUsers: React.FC<addUsersProps> = ({ isShow, onCloseModal }) => {
+  const { addUsers, addingUsers } = useAddUsers();
+  const { usersData } = useUsersStore();
   const {
+    reset,
     control,
     formState: { errors },
     handleSubmit,
@@ -16,9 +21,50 @@ export const AddUsers: React.FC<addUsersProps> = ({ isShow, onCloseModal }) => {
     resolver: yupResolver(addUsersValidationSchema),
   });
 
-  const onSubmit = (data: addUsersFormTypes) => {
+  const onSubmit = async (data: addUsersFormTypes) => {
     if (data) {
-      console.log("Hello", data);
+      await addUsers({
+        id: usersData?.length + 1,
+        name: data?.name,
+        username: data?.username,
+        email: data?.email,
+        address: {
+          street: data?.street,
+          suite: data?.suite,
+          city: data?.city,
+          zipcode: data?.zipCode,
+          geo: {
+            lat: data?.latitude,
+            lng: data?.longitude,
+          },
+        },
+        phone: data?.phone,
+        website: data?.website,
+        company: {
+          name: data?.name,
+          catchPhrase: data?.catchPhrase,
+          bs: data?.Bs,
+        },
+      });
+    }
+    if (!addingUsers) {
+      reset({
+        name: "",
+        username: "",
+        email: "",
+        street: "",
+        suite: "",
+        city: "",
+        zipCode: "",
+        latitude: "",
+        longitude: "",
+        phone: "",
+        website: "",
+        companyName: "",
+        catchPhrase: "",
+        Bs: "",
+      });
+      onCloseModal();
     }
   };
 
@@ -250,6 +296,7 @@ export const AddUsers: React.FC<addUsersProps> = ({ isShow, onCloseModal }) => {
               title='Add Entry'
               className='bg-[#8158F3] hover:bg-[#7547f2] duration-700 text-xs text-white font-light w-full py-[11px] mt-5'
               onPress={handleSubmit(onSubmit)}
+              isLoading={addingUsers}
             />
           </div>
         </div>

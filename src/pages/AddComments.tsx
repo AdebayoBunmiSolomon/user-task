@@ -5,13 +5,18 @@ import { useForm, Controller } from "react-hook-form";
 import { addCommentsFormTypes } from "../form/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addCommentsValidationSchema } from "../form/validation";
+import { useAddComments } from "../api/services/comments";
+import { useCommentsStore } from "../store";
 
 export const AddComments: React.FC<addCommentProps> = ({
   isShow,
   onCloseModal,
 }) => {
+  const { addComments, addingComments } = useAddComments();
+  const { commentsData } = useCommentsStore();
   const [nameField, setNameField] = useState<string>("Onboarding new...");
   const {
+    reset,
     setValue,
     control,
     formState: { errors },
@@ -21,9 +26,23 @@ export const AddComments: React.FC<addCommentProps> = ({
     resolver: yupResolver(addCommentsValidationSchema),
   });
 
-  const onSubmit = (data: addCommentsFormTypes) => {
+  const onSubmit = async (data: addCommentsFormTypes) => {
     if (data) {
-      console.log("Hello", data);
+      await addComments({
+        postId: commentsData?.length + 1,
+        id: commentsData?.length + 1,
+        name: data?.name,
+        email: data?.email,
+        body: data?.body,
+      });
+    }
+    if (!addingComments) {
+      reset({
+        name: "",
+        email: "",
+        body: "",
+      });
+      onCloseModal();
     }
   };
 
@@ -92,6 +111,7 @@ export const AddComments: React.FC<addCommentProps> = ({
               title='Add Entry'
               className='bg-[#8158F3] hover:bg-[#7547f2] duration-700 text-xs text-white font-light w-full py-[11px] mt-5'
               onPress={handleSubmit(onSubmit)}
+              isLoading={addingComments}
             />
           </div>
         </div>

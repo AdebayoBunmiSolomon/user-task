@@ -1,2 +1,2 @@
 export * from "./useAddComments";
-export * from "./useAddUsers";
+export * from "./useGetComments";

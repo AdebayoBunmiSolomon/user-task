@@ -1,5 +1,6 @@
 import React from "react";
 import { buttonProps } from "../../types/types";
+import { Loader } from "../common/Loader";
 
 export const Button: React.FC<buttonProps> = ({
   disabled,
@@ -8,6 +9,7 @@ export const Button: React.FC<buttonProps> = ({
   rightIcon,
   leftIcon,
   title,
+  isLoading,
 }) => {
   return (
     <button
@@ -15,7 +17,7 @@ export const Button: React.FC<buttonProps> = ({
       onClick={onPress}
       disabled={disabled}>
       {leftIcon && <p className='text-base font-medium'>{leftIcon}</p>}
-      {title}
+      {isLoading ? <Loader /> : title}
       {rightIcon && <p className='text-base font-medium'>{rightIcon}</p>}
     </button>
   );

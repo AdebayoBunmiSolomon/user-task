@@ -5,6 +5,7 @@ export type buttonProps = {
   rightIcon?: any;
   leftIcon?: any;
   title: string;
+  isLoading?: boolean;
 };
 
 export type addCommentProps = {
