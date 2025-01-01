@@ -31,10 +31,17 @@ cd cloned-repo-project
 ### 3. Install Dependencies
 
 ```bash
-npm install
+npm install /
+yarn install /
+pnpm install
 
 ### 4. Run the project
 
 ````bash
 npm run dev
 `````
+
+### 5. Test Web App
+
+Once the server is up, open your browser and go to:
+http://localhost:5173/
