@@ -41,5 +41,6 @@ export const useAddComments = () => {
     addingComments,
     toggleAddCommentForm,
     isAddCommtFrmVisible,
+    setIsAddCommtFrmVisible,
   };
 };

@@ -35,7 +35,11 @@ function App() {
   const [selectedActionBar, setSelectedActionBar] =
     useState<selectedActionBarType>("Comments");
   const { newEntry, newEntryType } = useApp();
-  const { toggleAddCommentForm, isAddCommtFrmVisible } = useAddComments();
+  const {
+    toggleAddCommentForm,
+    isAddCommtFrmVisible,
+    setIsAddCommtFrmVisible,
+  } = useAddComments();
   const { toggleAddUserForm, isAddUserFrmVisible } = useAddUsers();
 
   return (
@@ -98,7 +102,7 @@ function App() {
                 <CommentList
                   onClickItem={(email) => {
                     console.log(email);
-                    toggleAddCommentForm();
+                    setIsAddCommtFrmVisible(!isAddCommtFrmVisible);
                   }}
                 />
               ) : (

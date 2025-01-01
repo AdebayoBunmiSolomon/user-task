@@ -1,50 +1,43 @@
-# React + TypeScript + Vite
+markdown
+Copy code
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React + TypeScript + Vite Project
 
-Currently, two official plugins are available:
+This is a React project built with TypeScript and Vite. Follow the instructions below to set up and run the project locally.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before running the project, make sure you have the following installed on your machine:
 
-- Configure the top-level `parserOptions` property like this:
+- **Node.js**: Version 16 or higher ([Download Node.js](https://nodejs.org/)).
+- **npm**: Comes with Node.js. Alternatively, you can use **yarn** or **pnpm**.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 1. Clone the Repository
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Use the following command to clone the repository to your local machine:
+
+`````bash
+git clone https://github.com/AdebayoBunmiSolomon/user-task.git
+
+---
+
+### 2. Navigate to the project directory
+
+cd cloned-repo-project
+
+### 3. Install Dependencies
+
+```bash
+npm install
+
+### 4. Run the project
+
+````bash
+npm run dev
+`````
