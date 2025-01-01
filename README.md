@@ -1,6 +1,3 @@
-markdown
-Copy code
-
 # React + TypeScript + Vite Project
 
 This is a React project built with TypeScript and Vite. Follow the instructions below to set up and run the project locally.
