@@ -26,20 +26,23 @@ git clone https://github.com/AdebayoBunmiSolomon/user-task.git
 
 ### 2. Navigate to the project directory
 
+```bash
 cd cloned-repo-project
-`
+```
 
 ### 3. Install Dependencies
 
+```bash
 npm install or
 yarn install or
 pnpm install or
-``
+```
 
 ### 4. Run the project
 
+```bash
 npm run dev
-``
+```
 
 ### 5. Test Web App
 
