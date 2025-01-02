@@ -3,8 +3,9 @@ import { Loader } from "../common/Loader";
 import { useGetUsers } from "../../api/services/users";
 import { CustomTable } from "../common/Table";
 import { TableCell } from "@mui/material";
+import { userListProps } from "../../types/types";
 
-export const UsersList: React.FC<{}> = () => {
+export const UsersList: React.FC<userListProps> = ({ onClickItem }) => {
   const { getUsers, gettingUsers, usersData } = useGetUsers();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export const UsersList: React.FC<{}> = () => {
             "COMPANY",
           ]}
           data={usersData}
-          onClickRowItem={(email) => console.log(email)}
+          onClickRowItem={(data) => onClickItem(data)}
           renderRow={(item) => (
             <>
               <TableCell>{item.name}</TableCell>

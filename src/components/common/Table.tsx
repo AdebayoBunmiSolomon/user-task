@@ -67,14 +67,14 @@ export const CustomTable: React.FC<customTableProps> = ({
           <Select
             value={rowsPerPage}
             onChange={handleRowsPerPageChange}
-            className='!text-sm !flex !items-center'
+            className='!text-sm !flex !items-center !py-[-5px]'
             variant='outlined'
             size='small'
             IconComponent={(props) => (
               <MdKeyboardArrowDown {...props} size={20} />
             )}>
             {[5, 10, 20, 50].map((rows) => (
-              <MenuItem key={rows} value={rows}>
+              <MenuItem key={rows} value={rows} className='!text-xs'>
                 {rows}
               </MenuItem>
             ))}

@@ -28,7 +28,7 @@ export const CommentList: React.FC<commentListProps> = ({ onClickItem }) => {
         <CustomTable
           tableHeaders={["NAME", "EMAIL", "BODY"]}
           data={commentsData}
-          onClickRowItem={(email) => onClickItem(email)}
+          onClickRowItem={(data) => onClickItem(data)}
           renderRow={(item) => (
             <>
               <TableCell>{truncateText(item?.name, 25)}</TableCell>

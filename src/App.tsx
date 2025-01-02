@@ -35,11 +35,7 @@ function App() {
   const [selectedActionBar, setSelectedActionBar] =
     useState<selectedActionBarType>("Comments");
   const { newEntry, newEntryType } = useApp();
-  const {
-    toggleAddCommentForm,
-    isAddCommtFrmVisible,
-    setIsAddCommtFrmVisible,
-  } = useAddComments();
+  const { toggleAddCommentForm, isAddCommtFrmVisible } = useAddComments();
   const { toggleAddUserForm, isAddUserFrmVisible } = useAddUsers();
 
   return (
@@ -100,13 +96,20 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}>
               {selectedActionBar === sideBars[0] ? (
                 <CommentList
-                  onClickItem={(email) => {
-                    console.log(email);
-                    setIsAddCommtFrmVisible(!isAddCommtFrmVisible);
+                  onClickItem={(data) => {
+                    newEntry("Comments");
+                    toggleAddCommentForm();
+                    console.log(data);
                   }}
                 />
               ) : (
-                <UsersList />
+                <UsersList
+                  onClickItem={(data) => {
+                    newEntry("Users");
+                    toggleAddUserForm();
+                    console.log(data);
+                  }}
+                />
               )}
             </Suspense>
           </div>

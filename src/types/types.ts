@@ -46,12 +46,16 @@ export type customPaginationType = {
 };
 
 export interface commentListProps {
-  onClickItem: (email: string) => void;
+  onClickItem: (data: any) => void;
+}
+
+export interface userListProps {
+  onClickItem: (data: any) => void;
 }
 
 export interface customTableProps {
   tableHeaders: string[];
   data: any[];
-  onClickRowItem: (email: string) => void;
+  onClickRowItem: (data: any) => void;
   renderRow: (item: any) => React.ReactNode;
 }
