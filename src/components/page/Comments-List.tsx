@@ -11,9 +11,7 @@ export const CommentList: React.FC<commentListProps> = ({ onClickItem }) => {
 
   useEffect(() => {
     const initiateGetComments = async () => {
-      if (commentsData && commentsData.length > 0) {
-        //nothing happens
-      } else {
+      if (!commentsData || commentsData.length === 0) {
         await getComments();
       }
     };
@@ -26,14 +24,15 @@ export const CommentList: React.FC<commentListProps> = ({ onClickItem }) => {
         <Loader />
       ) : (
         <CustomTable
+          key={commentsData?.length || 0}
           tableHeaders={["NAME", "EMAIL", "BODY"]}
-          data={commentsData}
+          data={commentsData || []} // Provide a fallback for undefined
           onClickRowItem={(data) => onClickItem(data)}
           renderRow={(item) => (
             <>
-              <TableCell>{truncateText(item?.name, 25)}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{truncateText(item?.body, 40)}</TableCell>
+              <TableCell>{truncateText(item?.name || "", 25)}</TableCell>
+              <TableCell>{item.email || "N/A"}</TableCell>
+              <TableCell>{truncateText(item?.body || "", 40)}</TableCell>
             </>
           )}
         />

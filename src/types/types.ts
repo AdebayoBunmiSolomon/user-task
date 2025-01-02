@@ -8,17 +8,34 @@ export type buttonProps = {
   isLoading?: boolean;
 };
 
-export type addCommentProps = {
+export interface addCommentProps {
   isShow: boolean;
   onCloseModal: () => void;
-};
+}
 
-export type addUsersProps = {
+export interface editCommentProps {
   isShow: boolean;
   onCloseModal: () => void;
-};
+  data: any;
+}
 
-export type selectedActionBarType = "Comments" | "Users" | "";
+export interface addUsersProps {
+  isShow: boolean;
+  onCloseModal: () => void;
+}
+
+export interface editUsersProps {
+  isShow: boolean;
+  onCloseModal: () => void;
+  data: any;
+}
+
+export type selectedActionBarType =
+  | "Comments"
+  | "Users"
+  | "Edit-Comments"
+  | "Edit-Users"
+  | "";
 
 export interface inputProps {
   textArea?: boolean;

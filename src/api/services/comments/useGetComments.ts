@@ -10,7 +10,6 @@ export const useGetComments = () => {
   const getComments = async () => {
     setGettingComments(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
       const { status, data } = await GET(endpoints.COMMENTS, {}, {});
       if (status === 200) {
         console.log(data);

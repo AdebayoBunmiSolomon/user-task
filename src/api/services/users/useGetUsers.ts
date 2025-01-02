@@ -10,7 +10,6 @@ export const useGetUsers = () => {
   const getUsers = async () => {
     setGettingUsers(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
       const { status, data } = await GET(endpoints.USERS, {}, {});
       if (status === 200) {
         console.log(data);

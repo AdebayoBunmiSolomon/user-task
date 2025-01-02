@@ -1,42 +1,33 @@
-import React, { useState, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { Button } from "./components/shared";
 import { GoPlusCircle } from "react-icons/go";
 import { sideBars } from "./constants";
 import "./App.css";
 import { useApp } from "./hooks";
 import { selectedActionBarType } from "./types/types";
-import { useAddComments } from "./api/services/comments";
-import { useAddUsers } from "./api/services/users";
+import { useAddComments, useEditComments } from "./api/services/comments";
+import { useAddUsers, useEditUsers } from "./api/services/users";
 import { CommentsIcon } from "./assets/commentsIcon";
 import { UsersIcon } from "./assets/usersIcon";
 import wizerLogo from "./assets/wizer-logo.png";
-
-// Lazy-load components
-const AddComments = React.lazy(() =>
-  import("./pages/AddComments").then((module) => ({
-    default: module.AddComments,
-  }))
-);
-const AddUsers = React.lazy(() =>
-  import("./pages/AddUsers").then((module) => ({ default: module.AddUsers }))
-);
-const CommentList = React.lazy(() =>
-  import("./components/page/Comments-List").then((module) => ({
-    default: module.CommentList,
-  }))
-);
-const UsersList = React.lazy(() =>
-  import("./components/page/Users-List").then((module) => ({
-    default: module.UsersList,
-  }))
-);
+import {
+  AddComments,
+  AddUsers,
+  CommentList,
+  EditComment,
+  EditUser,
+  UsersList,
+} from "./lazy";
 
 function App() {
   const [selectedActionBar, setSelectedActionBar] =
     useState<selectedActionBarType>("Comments");
   const { newEntry, newEntryType } = useApp();
   const { toggleAddCommentForm, isAddCommtFrmVisible } = useAddComments();
+  const { toggleEditCommtFrm, isEditCommtFrmVisible } = useEditComments();
+  const { toggleEditUserFrm, isEditUserFrmVisible } = useEditUsers();
   const { toggleAddUserForm, isAddUserFrmVisible } = useAddUsers();
+  const [selectedTableItem, setSelectedTableItem] = useState<any>(null);
 
   return (
     <>
@@ -92,21 +83,22 @@ function App() {
                 </button>
               ))}
           </div>
-          <div className='md:w-[100%] lg:w-[88%] w-[100%] h-[400px] bg-[#F5F5F5] overflow-y-scroll overflow-hidden rounded-md p-2 scrollbar-hidden'>
+          <div className='md:w-[100%] lg:w-[88%] w-[100%] h-[400px] bg-[#F5F5F5] overflow-y-scroll overflow-hidden rounded-md p-2 scrollbar-hide'>
             <Suspense fallback={<div>Loading...</div>}>
               {selectedActionBar === sideBars[0] ? (
                 <CommentList
                   onClickItem={(data) => {
-                    newEntry("Comments");
-                    toggleAddCommentForm();
-                    console.log(data);
+                    newEntry("Edit-Comments");
+                    toggleEditCommtFrm();
+                    setSelectedTableItem(data);
                   }}
                 />
               ) : (
                 <UsersList
                   onClickItem={(data) => {
-                    newEntry("Users");
-                    toggleAddUserForm();
+                    newEntry("Edit-Users");
+                    toggleEditUserFrm();
+                    setSelectedTableItem(data);
                     console.log(data);
                   }}
                 />
@@ -121,12 +113,24 @@ function App() {
             isShow={isAddCommtFrmVisible}
             onCloseModal={() => toggleAddCommentForm()}
           />
-        ) : (
+        ) : newEntryType === "Users" ? (
           <AddUsers
             isShow={isAddUserFrmVisible}
             onCloseModal={() => toggleAddUserForm()}
           />
-        )}
+        ) : newEntryType === "Edit-Comments" ? (
+          <EditComment
+            onCloseModal={() => toggleEditCommtFrm()}
+            isShow={isEditCommtFrmVisible}
+            data={selectedTableItem}
+          />
+        ) : newEntryType === "Edit-Users" ? (
+          <EditUser
+            onCloseModal={() => toggleEditUserFrm()}
+            isShow={isEditUserFrmVisible}
+            data={selectedTableItem}
+          />
+        ) : undefined}
       </Suspense>
     </>
   );

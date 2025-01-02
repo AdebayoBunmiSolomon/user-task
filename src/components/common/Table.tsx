@@ -45,15 +45,18 @@ export const CustomTable: React.FC<customTableProps> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {paginatedData?.map((item, index) => (
-            <TableRow
-              key={index}
-              onClick={() => onClickRowItem(item)}
-              className='!hover:bg-gray-100 !border-b-[1px] !border-slate-300 !hover:cursor-pointer'
-              style={{ cursor: "pointer" }}>
-              {renderRow(item)}
-            </TableRow>
-          ))}
+          {paginatedData
+            ?.slice() // Create a shallow copy to avoid mutating the original array
+            .reverse() // Reverse the order of the data
+            .map((item, index) => (
+              <TableRow
+                key={index}
+                onClick={() => onClickRowItem(item)}
+                className='!hover:bg-gray-100 !border-b-[1px] !border-slate-300 !hover:cursor-pointer'
+                style={{ cursor: "pointer" }}>
+                {renderRow(item)}
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
 
