@@ -325,7 +325,7 @@ export const EditUsers: React.FC<editUsersProps> = ({
               name='Bs'
             />
             <Button
-              title='Add Entry'
+              title='Edit Entry'
               className='bg-[#8158F3] hover:bg-[#7547f2] duration-700 text-xs text-white font-light w-full py-[11px] mt-5'
               onPress={handleSubmit(onSubmit)}
               isLoading={editingUser}
